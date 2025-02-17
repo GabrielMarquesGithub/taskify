@@ -4,4 +4,8 @@ import { TaskController } from "@presentation/graphql/controllers/task.controlle
 @Module({
   controllers: [TaskController],
 })
-export class TasksModule {}
+export class TasksModule {
+  addTask(): void {
+    console.log("add task");
+  }
+}
