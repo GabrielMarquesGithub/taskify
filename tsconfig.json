@@ -17,6 +17,13 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
 
+    // Path aliases
+    "baseUrl": "./src",
+    "paths": {
+      "@presentation/*": ["presentation/*"],
+      "@infrastructure/*": ["infrastructure/*"]
+    },
+
     "outDir": "./dist"
   },
   "include": ["./src/**/*.ts"],

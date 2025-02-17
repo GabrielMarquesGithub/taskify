@@ -2,10 +2,18 @@
   "name": "taskify",
   "version": "0.0.1",
   "main": "src/index.ts",
-  "scripts": {},
+  "scripts": {
+    "dev": "nest start --watch"
+  },
   "license": "MIT",
   "author": "Gabriel Marques Magalhães",
+  "dependencies": {
+    "@nestjs/common": "^11.0.1",
+    "@nestjs/core": "^11.0.1",
+    "@nestjs/platform-fastify": "11.0.9"
+  },
   "devDependencies": {
+    "@nestjs/cli": "^11.0.0",
     "@types/node": "22.13.4",
     "ts-node": "10.9.2",
     "typescript": "5.7.3"
