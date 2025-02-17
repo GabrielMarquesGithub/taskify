@@ -1,0 +1,13 @@
+{
+  "name": "taskify",
+  "version": "0.0.1",
+  "main": "src/index.ts",
+  "scripts": {},
+  "license": "MIT",
+  "author": "Gabriel Marques Magalhães",
+  "devDependencies": {
+    "@types/node": "22.13.4",
+    "ts-node": "10.9.2",
+    "typescript": "5.7.3"
+  }
+}

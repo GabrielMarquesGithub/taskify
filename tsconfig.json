@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "ES2020",
+    "moduleResolution": "Node",
+    "sourceMap": true,
+    "declaration": true,
+    "strict": true,
+    "strictPropertyInitialization": false,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+
+    // Permite o uso de import/export
+    "esModuleInterop": true,
+
+    // Essencial para o uso de decorators pelo nestjs
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*.ts"],
+  "exclude": ["**/node_modules"]
+}
