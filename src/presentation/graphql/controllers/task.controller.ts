@@ -6,7 +6,7 @@ export class TaskController {
   check() {
     return {
       status: "ok",
-      message: "Hello, World!",
+      message: "Hello, World!"
     };
   }
 }
