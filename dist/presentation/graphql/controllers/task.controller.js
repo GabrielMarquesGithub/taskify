@@ -11,6 +11,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TaskController = void 0;
 const common_1 = require("@nestjs/common");
+const test = test => console.log(test);
+test("Hello, World!");
 let TaskController = class TaskController {
     constructor() { }
     check() {

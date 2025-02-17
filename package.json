@@ -1,21 +1,26 @@
 {
   "name": "taskify",
   "version": "0.0.1",
-  "main": "src/index.ts",
-  "scripts": {
-    "dev": "nest start --watch"
-  },
   "license": "MIT",
   "author": "Gabriel Marques Magalhães",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "nest start --watch",
+    "lint:eslint:check": "eslint ."
+  },
   "dependencies": {
-    "@nestjs/common": "^11.0.1",
-    "@nestjs/core": "^11.0.1",
+    "@nestjs/common": "11.0.1",
+    "@nestjs/core": "11.0.1",
     "@nestjs/platform-fastify": "11.0.9"
   },
   "devDependencies": {
-    "@nestjs/cli": "^11.0.0",
+    "@eslint/js": "9.20.0",
+    "@nestjs/cli": "11.0.0",
     "@types/node": "22.13.4",
+    "eslint": "^9.20.1",
+    "globals": "15.15.0",
     "ts-node": "10.9.2",
-    "typescript": "5.7.3"
+    "typescript": "5.7.3",
+    "typescript-eslint": "8.24.0"
   }
 }
