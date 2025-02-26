@@ -22,7 +22,9 @@
     "baseUrl": "./src",
     "paths": {
       "@presentation/*": ["presentation/*"],
-      "@infrastructure/*": ["infrastructure/*"]
+      "@infrastructure/*": ["infrastructure/*"],
+      "@domain/*": ["domain/*"],
+      "@application/*": ["application/*"]
     },
 
     "outDir": "./dist"
