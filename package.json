@@ -5,7 +5,11 @@
   "author": "Gabriel Marques Magalhães",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "nest start --watch",
+    "dev": "npm run services:up && npm run services:wait:database && nest start --watch",
+    "services:up": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml up -d",
+    "services:down": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml down",
+    "services:stop": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml stop",
+    "services:wait:database": "ts-node ./src/infrastructure/scripts/wait-for-postgres.ts",
     "lint:eslint:check": "eslint .",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
@@ -14,7 +18,8 @@
   "dependencies": {
     "@nestjs/common": "11.0.1",
     "@nestjs/core": "11.0.1",
-    "@nestjs/platform-fastify": "11.0.9"
+    "@nestjs/platform-fastify": "11.0.9",
+    "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@eslint/js": "9.20.0",

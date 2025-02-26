@@ -27,6 +27,7 @@
       "@application/*": ["application/*"]
     },
 
+    "typeRoots": ["./src/types"],
     "outDir": "./dist"
   }
 }
