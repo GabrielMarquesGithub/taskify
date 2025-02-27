@@ -10,6 +10,9 @@
     "services:down": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml down",
     "services:stop": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml stop",
     "services:wait:database": "ts-node ./src/infrastructure/scripts/wait-for-postgres.ts",
+    "migration:generate": "dotenv -e .env.development -- npx prisma migrate dev --create-only",
+    "migration:run": "dotenv -e .env.development -- npx prisma migrate deploy",
+    "migration:status": "dotenv -e .env.development -- npx prisma migrate status",
     "lint:eslint:check": "eslint .",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
@@ -20,12 +23,14 @@
     "@nestjs/config": "^4.0.0",
     "@nestjs/core": "11.0.1",
     "@nestjs/platform-fastify": "11.0.9",
+    "@prisma/client": "^6.4.1",
     "dotenv": "^16.4.7"
   },
   "devDependencies": {
     "@eslint/js": "9.20.0",
     "@nestjs/cli": "11.0.0",
     "@types/node": "22.13.4",
+    "dotenv-cli": "^8.0.0",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "globals": "15.15.0",
@@ -35,5 +40,8 @@
     "ts-node": "10.9.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.24.0"
+  },
+  "prisma": {
+    "schema": "src/infrastructure/database/prisma/schema"
   }
 }
