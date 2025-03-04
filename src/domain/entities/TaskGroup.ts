@@ -1,14 +1,26 @@
-import { Task } from "@domain/entities/Task.entity";
+import { v4 as uuid } from "uuid";
+
+import { Task } from "@domain/entities/Task";
+
+type ITaskGroupProps = {
+  id?: string;
+  name: string;
+  tasks?: Task[];
+};
 
 class TaskGroup {
-  private readonly id: string;
+  private readonly _id: string;
   private _name: string;
   private _tasks: Task[];
 
-  constructor(id: string, name: string, tasks: Task[] = []) {
-    this.id = id;
-    this._name = name;
-    this._tasks = tasks;
+  constructor(props: ITaskGroupProps) {
+    this._id = props.id ?? uuid();
+    this._name = props.name;
+    this._tasks = props.tasks ?? [];
+  }
+
+  public get id(): string {
+    return this._id;
   }
 
   public get tasks(): Task[] {

@@ -1,19 +1,19 @@
-enum TaskStatus {
+enum TaskState {
     TODO
     IN_PROGRESS
     DONE
 }
 
 model Task {
-    id          Int        @id @default(autoincrement())
+    id          String    @id
     title       String
     description String?
-    status      TaskStatus @default(TODO)
-    isComplete  Boolean    @default(false)
+    state       TaskState @default(TODO)
+    isCompleted Boolean   @default(false)
 
     updatedAt DateTime @updatedAt
     createdAt DateTime @default(now())
 
     taskGroup   TaskGroup? @relation(fields: [taskGroupId], references: [id])
-    taskGroupId Int?
+    taskGroupId String?
 }

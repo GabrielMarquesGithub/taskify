@@ -6,7 +6,8 @@ import { TasksModule } from "@infrastructure/server/modules/task.module";
 @Module({
   imports: [
     ConfigModule.forRoot({
-      envFilePath: ".env.development"
+      envFilePath: ".env.development",
+      expandVariables: true
     }),
     TasksModule
   ]

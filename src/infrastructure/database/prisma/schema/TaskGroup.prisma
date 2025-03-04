@@ -1,9 +1,9 @@
 model TaskGroup {
-    id   Int    @id @default(autoincrement())
+    id   String @id
     name String
 
     updatedAt DateTime @updatedAt
     createdAt DateTime @default(now())
 
-    Task Task[]
+    tasks Task[]
 }
