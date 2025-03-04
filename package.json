@@ -5,14 +5,14 @@
   "author": "Gabriel Marques Magalhães",
   "main": "src/index.ts",
   "scripts": {
-    "dev": "npm run services:up && npm run services:wait:database && nest start --watch",
+    "dev": "npm run services:up && npm run services:wait:database && (trap 'npm run services:stop' INT TERM HUP; nest start --watch)",
     "services:up": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml up -d",
     "services:down": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml down",
     "services:stop": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml stop",
     "services:wait:database": "ts-node ./src/infrastructure/scripts/wait-for-postgres.ts",
     "migration:generate": "dotenv -e .env.development -- npx prisma migrate dev --create-only",
     "migration:run": "dotenv -e .env.development -- npx prisma migrate deploy",
-    "migration:status": "dotenv -e .env.development -- npx prisma migrate status",
+    "migration:client": "npx prisma generate",
     "lint:eslint:check": "eslint .",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
@@ -24,7 +24,9 @@
     "@nestjs/core": "11.0.1",
     "@nestjs/platform-fastify": "11.0.9",
     "@prisma/client": "^6.4.1",
-    "dotenv": "^16.4.7"
+    "dotenv": "^16.4.7",
+    "uuid": "^11.1.0",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/js": "9.20.0",
