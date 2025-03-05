@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Inject, Post, UsePipes } from "@nestjs/common";
+import {
+  Body,
+  Controller,
+  Get,
+  Inject,
+  Post,
+  Query,
+  UsePipes
+} from "@nestjs/common";
 
 import { ITaskRepository } from "@domain/repositories/ITaskRepository";
 
@@ -8,8 +16,13 @@ import { GetTasks } from "@application/use-cases/GetTasks";
 import { ZodValidationPipe } from "@presentation/validators/ZodValidationPipe";
 import {
   createTaskSchema,
-  ICreateTaskSchema
+  ICreateTaskSchema,
+  taskOrderFieldsSchema
 } from "@presentation/validators/schemas/task";
+import {
+  getBaseListFiltersSchema,
+  IBaseListFiltersSchema
+} from "@presentation/validators/schemas/shared";
 
 @Controller("task")
 export class TaskController {
@@ -18,8 +31,11 @@ export class TaskController {
   ) {}
 
   @Get()
-  getTasks() {
-    return new GetTasks(this.taskRepository).execute();
+  @UsePipes(
+    new ZodValidationPipe(getBaseListFiltersSchema(taskOrderFieldsSchema))
+  )
+  getTasks(@Query() query: IBaseListFiltersSchema) {
+    return new GetTasks(this.taskRepository).execute(query);
   }
 
   @Post("add")
