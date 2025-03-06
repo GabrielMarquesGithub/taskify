@@ -47,7 +47,6 @@ class TaskRepository implements ITaskRepository {
   }
 
   async getTasks(filters: IBaseListFilters): Promise<Task[]> {
-    console.log("filters", filters);
     const tasksReturned = await this.prisma.task.findMany({
       take: filters.limit,
       skip: filters.offset,
