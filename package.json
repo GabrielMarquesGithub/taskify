@@ -6,6 +6,9 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "npm run services:up && npm run services:wait:database && (trap 'npm run services:stop' INT TERM HUP; nest start --watch)",
+    "test": "npm run services:up && jest",
+    "test:watch": "jest --watch",
+    "posttest": "npm run services:stop",
     "services:up": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml up -d",
     "services:down": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml down",
     "services:stop": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml stop",
@@ -41,7 +44,7 @@
     "jest": "^29.7.0",
     "prettier": "3.5.1",
     "prisma": "^6.4.1",
-    "supertest": "^7.0.0",
+    "ts-jest": "^29.2.6",
     "ts-node": "10.9.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.24.0"
