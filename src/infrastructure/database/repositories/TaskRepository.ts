@@ -6,7 +6,8 @@ import { IBaseListFilters } from "@domain/interfaces/IBaseListFilters";
 
 import {
   toDomainTask,
-  toDomainTasks
+  toDomainTasks,
+  toPersistenceTask
 } from "@infrastructure/database/mappers/taskMapper";
 import { toDomainTaskGroup } from "@infrastructure/database/mappers/taskGroupMapper";
 import { PrismaService } from "@infrastructure/server/services/prisma.service";
@@ -17,11 +18,7 @@ class TaskRepository implements ITaskRepository {
 
   async saveTask(task: Task) {
     const taskCreated = await this.prisma.task.create({
-      data: {
-        id: task.id,
-        title: task.title,
-        description: task.description
-      },
+      data: toPersistenceTask(task),
       include: {
         taskGroup: true
       }
