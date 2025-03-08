@@ -26,3 +26,7 @@ export function toPersistenceTask(task: Task): ISaveTaskDTO {
     taskGroupId: task.taskGroup?.id ?? null
   };
 }
+
+export function toPersistenceTasks(tasks: Task[]): ISaveTaskDTO[] {
+  return tasks.map((task) => toPersistenceTask(task));
+}
