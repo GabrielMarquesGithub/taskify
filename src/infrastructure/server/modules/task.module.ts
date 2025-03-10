@@ -8,15 +8,11 @@ import { TaskController } from "@presentation/rest/controllers/task.controller";
 @Module({
   controllers: [TaskController],
   providers: [
-    PrismaService,
     {
       provide: "ITaskRepository",
-      useClass: TaskRepository
+      useFactory: () => new TaskRepository(new PrismaService())
     }
   ]
 })
-export class TasksModule {
-  addTask(): void {
-    console.log("add task");
-  }
-}
+// eslint-disable-next-line @typescript-eslint/no-extraneous-class
+export class TasksModule {}
