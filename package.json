@@ -13,7 +13,7 @@
     "services:down": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml down",
     "services:stop": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml stop",
     "services:wait:database": "ts-node ./src/infrastructure/scripts/wait-for-postgres.ts",
-    "migration:generate": "dotenv -e .env.development -- npx prisma migrate dev --create-only",
+    "migration:dev": "dotenv -e .env.development -- npx prisma migrate dev --skip-seed",
     "migration:run": "dotenv -e .env.development -- npx prisma migrate deploy",
     "migration:reset": "dotenv -e .env.development -- npx prisma migrate reset --force",
     "db:client": "npx prisma generate",
