@@ -33,4 +33,38 @@ describe("GET /task", () => {
       expect(task).toHaveProperty("title");
     });
   });
+
+  it(`Getting tasks with search`, async () => {
+    const title = tasksSeed[0].title;
+
+    const response = await orchestrator.app.inject({
+      method: "GET",
+      url: `/task?search=${title}`
+    });
+
+    expect(response.statusCode).toBe(200);
+    const responseBody: Task[] = response.json();
+    expect(responseBody).toBeInstanceOf(Array);
+    expect(responseBody.length).toBe(1);
+
+    const task = responseBody[0];
+    expect(task).toHaveProperty("id");
+    expect(task.id).toMatch(orchestrator.idRegex);
+    expect(task).toHaveProperty("title");
+    expect(task.title).toBe(title);
+  });
+
+  it(`Getting tasks with limit`, async () => {
+    const limit = 2;
+
+    const response = await orchestrator.app.inject({
+      method: "GET",
+      url: `/task?limit=${limit.toString()}`
+    });
+
+    expect(response.statusCode).toBe(200);
+    const responseBody: Task[] = response.json();
+    expect(responseBody).toBeInstanceOf(Array);
+    expect(responseBody.length).toBe(limit);
+  });
 });
