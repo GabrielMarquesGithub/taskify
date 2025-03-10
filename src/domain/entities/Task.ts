@@ -57,17 +57,6 @@ class Task {
     this._isCompleted = true;
     this._state = "DONE";
   }
-
-  toJSON() {
-    return {
-      id: this.id,
-      title: this.title,
-      description: this.description,
-      state: this.state,
-      isCompleted: this.isCompleted,
-      taskGroup: this.taskGroup
-    };
-  }
 }
 
 export { Task };
