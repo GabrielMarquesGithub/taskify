@@ -1,4 +1,5 @@
 import { Injectable } from "@nestjs/common";
+import { PrismaClient } from "@prisma/client";
 
 import { Task } from "@domain/entities/Task";
 import { ITaskRepository } from "@domain/repositories/ITaskRepository";
@@ -10,11 +11,10 @@ import {
   toPersistenceTask
 } from "@infrastructure/database/mappers/taskMapper";
 import { toDomainTaskGroup } from "@infrastructure/database/mappers/taskGroupMapper";
-import { PrismaService } from "@infrastructure/server/services/prisma.service";
 
 @Injectable()
 class TaskRepository implements ITaskRepository {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaClient) {}
 
   async saveTask(task: Task) {
     const taskCreated = await this.prisma.task.create({
