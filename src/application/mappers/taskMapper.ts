@@ -1,6 +1,6 @@
 import { Task } from "@domain/entities/Task";
 
-export function toResponse(task: Task) {
+export function toResponseTask(task: Task) {
   return {
     id: task.id,
     title: task.title,
@@ -9,4 +9,8 @@ export function toResponse(task: Task) {
     isCompleted: task.isCompleted,
     taskGroup: task.taskGroup
   };
+}
+
+export function toResponseTasks(tasks: Task[]) {
+  return tasks.map(toResponseTask);
 }
