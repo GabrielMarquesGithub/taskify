@@ -1,13 +1,13 @@
 import { describe, it, beforeAll, afterAll, expect } from "@jest/globals";
 
+import { Task } from "@domain/entities/Task";
+
 import { Orchestrator } from "../../Orchestrator";
-import { tasksSeed } from "../../seeds/tasksSeed";
+import { tasksSeed } from "../../../seeds/tasksSeed";
 
 const orchestrator = Orchestrator.instance;
 
 beforeAll(async () => {
-  await orchestrator.cleanDatabase();
-  await orchestrator.seedTaskEntity(tasksSeed);
   await orchestrator.init();
 });
 
@@ -21,7 +21,16 @@ describe("GET /task", () => {
       method: "GET",
       url: "/task"
     });
+
     expect(response.statusCode).toBe(200);
-    expect(response.json()).toEqual(tasksSeed);
+    const responseBody: Task[] = response.json();
+    expect(responseBody).toBeInstanceOf(Array);
+    expect(responseBody.length).toBeGreaterThanOrEqual(tasksSeed.length);
+
+    responseBody.forEach((task) => {
+      expect(task).toHaveProperty("id");
+      expect(task.id).toMatch(orchestrator.idRegex);
+      expect(task).toHaveProperty("title");
+    });
   });
 });

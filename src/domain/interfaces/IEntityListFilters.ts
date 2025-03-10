@@ -1,7 +1,7 @@
-export type IBaseListFilters = {
+export type IEntityListFilters<T extends string> = {
   limit?: number;
   offset?: number;
-  orderBy?: string;
+  orderBy?: T;
   order?: "asc" | "desc";
   search?: string;
 };

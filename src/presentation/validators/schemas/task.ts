@@ -1,7 +1,8 @@
 import { z } from "zod";
-import { Task } from "@prisma/client";
 
 export type ICreateTaskSchema = z.output<typeof createTaskSchema>;
+
+export type ITaskOrderFieldsSchema = z.output<typeof taskOrderFieldsSchema>;
 
 export const createTaskSchema = z.object({
   title: z
@@ -20,10 +21,7 @@ export const createTaskSchema = z.object({
     .optional()
 });
 
-export const taskOrderFieldsSchema = z.enum<
-  keyof Task,
-  [keyof Task, ...(keyof Task)[]]
->(["title", "description", "state", "taskGroupId", "createdAt", "updatedAt"], {
+export const taskOrderFieldsSchema = z.enum(["title", "description", "state"], {
   message:
-    "O campo de ordenação deve ser um dos campos: title, description, state, taskGroupId, createdAt, updatedAt"
+    "O campo de ordenação deve ser um dos campos: title, description, state"
 });

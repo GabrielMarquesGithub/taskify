@@ -1,7 +1,7 @@
 import { z } from "zod";
 
-export type IBaseListFiltersSchema = z.output<
-  ReturnType<typeof getBaseListFiltersSchema>
+export type IBaseListFiltersSchema<T extends string> = z.output<
+  ReturnType<typeof getBaseListFiltersSchema<[T]>>
 >;
 
 export function getBaseListFiltersSchema<T extends [string, ...string[]]>(

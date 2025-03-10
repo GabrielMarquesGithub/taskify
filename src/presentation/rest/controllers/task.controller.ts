@@ -17,6 +17,7 @@ import { ZodValidationPipe } from "@presentation/validators/ZodValidationPipe";
 import {
   createTaskSchema,
   ICreateTaskSchema,
+  ITaskOrderFieldsSchema,
   taskOrderFieldsSchema
 } from "@presentation/validators/schemas/task";
 import {
@@ -34,7 +35,7 @@ export class TaskController {
   @UsePipes(
     new ZodValidationPipe(getBaseListFiltersSchema(taskOrderFieldsSchema))
   )
-  getTasks(@Query() query: IBaseListFiltersSchema) {
+  getTasks(@Query() query: IBaseListFiltersSchema<ITaskOrderFieldsSchema>) {
     return new GetTasks(this.taskRepository).execute(query);
   }
 

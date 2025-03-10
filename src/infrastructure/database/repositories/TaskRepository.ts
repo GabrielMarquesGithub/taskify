@@ -2,8 +2,10 @@ import { Injectable } from "@nestjs/common";
 import { PrismaClient } from "@prisma/client";
 
 import { Task } from "@domain/entities/Task";
-import { ITaskRepository } from "@domain/repositories/ITaskRepository";
-import { IBaseListFilters } from "@domain/interfaces/IBaseListFilters";
+import {
+  ITaskListFilters,
+  ITaskRepository
+} from "@domain/repositories/ITaskRepository";
 
 import {
   toDomainTask,
@@ -49,7 +51,7 @@ class TaskRepository implements ITaskRepository {
     return toDomainTask(taskReturned);
   }
 
-  async getTasks(filters: IBaseListFilters): Promise<Task[]> {
+  async getTasks(filters: ITaskListFilters): Promise<Task[]> {
     const tasksReturned = await this.prisma.task.findMany({
       take: filters.limit,
       skip: filters.offset,
