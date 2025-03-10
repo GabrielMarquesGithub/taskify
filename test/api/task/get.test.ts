@@ -1,37 +1,27 @@
 import { describe, it, beforeAll, afterAll, expect } from "@jest/globals";
-import { Test } from "@nestjs/testing";
-import {
-  FastifyAdapter,
-  NestFastifyApplication
-} from "@nestjs/platform-fastify";
 
-import { AppModule } from "@infrastructure/server/modules/app.module";
+import { Orchestrator } from "../../Orchestrator";
+import { tasksSeed } from "../../seeds/tasksSeed";
 
-let app: NestFastifyApplication;
+const orchestrator = Orchestrator.instance;
 
 beforeAll(async () => {
-  const moduleRef = await Test.createTestingModule({
-    imports: [AppModule]
-  }).compile();
-
-  app = moduleRef.createNestApplication<NestFastifyApplication>(
-    new FastifyAdapter()
-  );
-  await app.init();
-  await app.getHttpAdapter().getInstance().ready();
+  await orchestrator.cleanDatabase();
+  await orchestrator.seedTaskEntity(tasksSeed);
+  await orchestrator.init();
 });
 
 afterAll(async () => {
-  await app.close();
+  await orchestrator.close();
 });
 
 describe("GET /task", () => {
   it(`Getting tasks`, async () => {
-    const response = await app.inject({
+    const response = await orchestrator.app.inject({
       method: "GET",
       url: "/task"
     });
     expect(response.statusCode).toBe(200);
-    console.log(response.payload);
+    expect(response.json()).toEqual(tasksSeed);
   });
 });
