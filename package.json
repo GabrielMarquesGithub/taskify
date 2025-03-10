@@ -6,7 +6,7 @@
   "main": "src/index.ts",
   "scripts": {
     "dev": "npm run services:up && npm run services:wait:database && (trap 'npm run services:stop' INT TERM HUP; nest start --watch)",
-    "test": "npm run services:up && jest",
+    "test": "npm run services:up && npm run migration:reset && jest",
     "test:watch": "jest --watch",
     "posttest": "npm run services:stop",
     "services:up": "docker compose --env-file ./.env.development -f ./src/infrastructure/database/compose.yml up -d",
