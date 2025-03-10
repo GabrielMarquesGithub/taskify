@@ -15,7 +15,9 @@
     "services:wait:database": "ts-node ./src/infrastructure/scripts/wait-for-postgres.ts",
     "migration:generate": "dotenv -e .env.development -- npx prisma migrate dev --create-only",
     "migration:run": "dotenv -e .env.development -- npx prisma migrate deploy",
-    "migration:client": "npx prisma generate",
+    "migration:reset": "dotenv -e .env.development -- npx prisma migrate reset --force",
+    "db:client": "npx prisma generate",
+    "db:seed": "npx prisma db seed",
     "lint:eslint:check": "eslint .",
     "lint:prettier:check": "prettier --check .",
     "lint:prettier:fix": "prettier --write .",
@@ -50,6 +52,7 @@
     "typescript-eslint": "8.24.0"
   },
   "prisma": {
-    "schema": "src/infrastructure/database/prisma/schema"
+    "schema": "src/infrastructure/database/prisma/schema",
+    "seed": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register seeds/seeder.ts"
   }
 }
