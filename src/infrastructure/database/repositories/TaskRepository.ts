@@ -16,6 +16,12 @@ import { toDomainTaskGroup } from "@infrastructure/database/mappers/taskGroupMap
 class TaskRepository implements ITaskRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
+  async saveTasks(tasks: Task[]) {
+    await this.prisma.task.createMany({
+      data: tasks.map(toPersistenceTask)
+    });
+  }
+
   async saveTask(task: Task) {
     const taskCreated = await this.prisma.task.create({
       data: toPersistenceTask(task),
