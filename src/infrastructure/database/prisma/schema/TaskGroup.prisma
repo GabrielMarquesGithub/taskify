@@ -1,5 +1,5 @@
 model TaskGroup {
-    id   String @id
+    id   String @id @default(uuid())
     name String
 
     updatedAt DateTime @updatedAt

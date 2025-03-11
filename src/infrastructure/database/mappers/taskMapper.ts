@@ -5,10 +5,7 @@ import { TaskGroup } from "@domain/entities/TaskGroup";
 
 type IDBTask = PrismaTask & { taskGroup?: TaskGroup };
 
-type ISaveTaskDTO = Pick<
-  PrismaTask,
-  "id" | "description" | "title" | "taskGroupId"
->;
+type ISaveTaskDTO = Pick<PrismaTask, "description" | "title" | "taskGroupId">;
 
 export function toDomainTask(task: IDBTask): Task {
   return new Task({ ...task, description: task.description ?? undefined });
@@ -20,7 +17,6 @@ export function toDomainTasks(tasks: IDBTask[]): Task[] {
 
 export function toPersistenceTask(task: Task): ISaveTaskDTO {
   return {
-    id: task.id,
     title: task.title,
     description: task.description ?? null,
     taskGroupId: task.taskGroup?.id ?? null

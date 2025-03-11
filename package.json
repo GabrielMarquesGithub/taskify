@@ -29,7 +29,6 @@
     "@nestjs/platform-fastify": "11.0.9",
     "@prisma/client": "^6.4.1",
     "dotenv": "^16.4.7",
-    "uuid": "^11.1.0",
     "zod": "^3.24.2"
   },
   "devDependencies": {

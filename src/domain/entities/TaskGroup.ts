@@ -1,5 +1,3 @@
-import { v4 as uuid } from "uuid";
-
 import { Task } from "@domain/entities/Task";
 
 type ITaskGroupProps = {
@@ -9,17 +7,17 @@ type ITaskGroupProps = {
 };
 
 class TaskGroup {
-  private readonly _id: string;
+  private readonly _id?: string;
   private _name: string;
   private _tasks: Task[];
 
   constructor(props: ITaskGroupProps) {
-    this._id = props.id ?? uuid();
+    this._id = props.id;
     this._name = props.name;
     this._tasks = props.tasks ?? [];
   }
 
-  public get id(): string {
+  public get id(): string | undefined {
     return this._id;
   }
 

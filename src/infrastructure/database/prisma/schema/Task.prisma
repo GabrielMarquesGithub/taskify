@@ -5,7 +5,7 @@ enum TaskState {
 }
 
 model Task {
-    id          String    @id
+    id          String    @id @default(uuid())
     title       String
     description String?
     state       TaskState @default(TODO)

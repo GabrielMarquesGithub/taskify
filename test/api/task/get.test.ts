@@ -15,6 +15,21 @@ afterAll(async () => {
   await orchestrator.close();
 });
 
+function testTaskFormat(task: Task) {
+  expect(task).toHaveProperty("id");
+  expect(task.id).toMatch(orchestrator.idRegex);
+  expect(task).toHaveProperty("title");
+  expect(typeof task.title).toBe("string");
+  expect(task).toHaveProperty("state");
+  expect(typeof task.state).toBe("string");
+  expect(task).toHaveProperty("isCompleted");
+  expect(typeof task.isCompleted).toBe("boolean");
+  expect(task).toHaveProperty("createdAt");
+  expect(typeof task.createdAt).toBe("string");
+  expect(task).toHaveProperty("updatedAt");
+  expect(typeof task.updatedAt).toBe("string");
+}
+
 describe("GET /task", () => {
   it(`Getting tasks`, async () => {
     const response = await orchestrator.app.inject({
@@ -27,11 +42,7 @@ describe("GET /task", () => {
     expect(responseBody).toBeInstanceOf(Array);
     expect(responseBody.length).toBeGreaterThanOrEqual(tasksSeed.length);
 
-    responseBody.forEach((task) => {
-      expect(task).toHaveProperty("id");
-      expect(task.id).toMatch(orchestrator.idRegex);
-      expect(task).toHaveProperty("title");
-    });
+    responseBody.forEach(testTaskFormat);
   });
 
   it(`Getting tasks with search`, async () => {
@@ -48,9 +59,8 @@ describe("GET /task", () => {
     expect(responseBody.length).toBe(1);
 
     const task = responseBody[0];
-    expect(task).toHaveProperty("id");
-    expect(task.id).toMatch(orchestrator.idRegex);
-    expect(task).toHaveProperty("title");
+
+    testTaskFormat(task);
     expect(task.title).toBe(title);
   });
 

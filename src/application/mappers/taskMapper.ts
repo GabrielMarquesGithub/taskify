@@ -7,7 +7,9 @@ export function toResponseTask(task: Task) {
     description: task.description,
     state: task.state,
     isCompleted: task.isCompleted,
-    taskGroup: task.taskGroup
+    taskGroup: task.taskGroup,
+    createdAt: task.createdAt,
+    updatedAt: task.updatedAt
   };
 }
 
