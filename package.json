@@ -23,34 +23,34 @@
     "lint:prettier:fix": "prettier --write ."
   },
   "dependencies": {
-    "@nestjs/common": "11.0.1",
-    "@nestjs/config": "^4.0.0",
-    "@nestjs/core": "11.0.1",
-    "@nestjs/platform-fastify": "11.0.9",
-    "@prisma/client": "^6.4.1",
-    "dotenv": "^16.4.7",
-    "zod": "^3.24.2"
+    "@nestjs/common": "11.1.6",
+    "@nestjs/config": "4.0.0",
+    "@nestjs/core": "11.1.6",
+    "@nestjs/platform-fastify": "11.1.6",
+    "@prisma/client": "6.4.1",
+    "dotenv": "16.4.7",
+    "zod": "3.24.2"
   },
   "devDependencies": {
-    "@eslint/js": "9.20.0",
-    "@nestjs/cli": "11.0.0",
-    "@nestjs/testing": "^11.0.11",
+    "@eslint/js": "9.33.0",
+    "@nestjs/cli": "11.0.10",
+    "@nestjs/testing": "11.1.6",
     "@types/node": "22.13.4",
-    "dotenv-cli": "^8.0.0",
-    "eslint": "^9.20.1",
-    "eslint-config-prettier": "^10.0.1",
+    "dotenv-cli": "8.0.0",
+    "eslint": "9.33.0",
+    "eslint-config-prettier": "10.0.1",
     "globals": "15.15.0",
-    "husky": "^9.1.7",
-    "jest": "^29.7.0",
+    "husky": "9.1.7",
+    "jest": "29.7.0",
     "prettier": "3.5.1",
-    "prisma": "^6.4.1",
-    "ts-jest": "^29.2.6",
+    "prisma": "6.4.1",
+    "ts-jest": "29.2.6",
     "ts-node": "10.9.2",
     "typescript": "5.7.3",
     "typescript-eslint": "8.24.0"
   },
   "prisma": {
     "schema": "src/infrastructure/database/prisma/schema",
-    "seed": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register seeds/seeder.ts"
+    "seed": "dotenv -e .env.development -- ts-node -r tsconfig-paths/register src/infrastructure/database/prisma/seeds/seeder.ts"
   }
 }

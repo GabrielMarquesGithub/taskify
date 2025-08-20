@@ -3,7 +3,7 @@ import { describe, it, beforeAll, afterAll, expect } from "@jest/globals";
 import { Task } from "@domain/entities/Task";
 
 import { Orchestrator } from "../../Orchestrator";
-import { tasksSeed } from "../../../seeds/tasksSeed";
+import { tasksSeed } from "../../../src/infrastructure/database/prisma/seeds/tasksSeed";
 
 const orchestrator = Orchestrator.instance;
 
